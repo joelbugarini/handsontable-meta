@@ -4,10 +4,13 @@
   "description": "Handsontable Meta Loader",
   "main": "index.js",
   "dependencies": {
+    "@types/handsontable": "^0.31.2"
   },
   "devDependencies": {
+    "handsontable": "^0.34.4",
     "source-map-loader": "^0.1.5",
-    "ts-loader": "^0.8.2"
+    "ts-loader": "^0.8.2",
+    "typescript": "^2.5.2"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
