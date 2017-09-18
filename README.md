@@ -21,5 +21,6 @@ Resize a column/row and get the settings again:
 ```javascript
 {
     "colWidths":[50,50,229,55,53],
+    "rowHeights":[23,86,23,23]
 }
 ```
