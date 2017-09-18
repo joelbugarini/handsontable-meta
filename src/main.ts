@@ -3,25 +3,15 @@ import Handsontable from 'handsontable';
 
 export class main {
     hot: Handsontable;
-    numberOfColumns: number;
-    numberOfRows: number;
-    horizontalArray: Array<Cell>;
-    verticalArray: Array<Cell>;
-    colWidths: Array<number>;
-    rowHeights: Array<number>;
 
     constructor(hot: Handsontable) {
         this.hot = hot;
-        this.build();
-
-        console.log(this.colWidths);    
     }
-    build(){
-        this.numberOfColumns = this.getNumberOfColumns();
-        this.numberOfRows = this.getNumberOfRows();
-        this.horizontalArray = this.getHorizontalArray();
-        this.verticalArray = this.getVerticalArray();
-        this.colWidths = this.getColWidths();
+    getSettings(){
+        return {
+            colWidths: this.getColWidths(),
+            rowHeights:this.getRowHeights()
+        }
     }
     getNumberOfColumns(){        
         return this.hot.getData()[0].length;
@@ -31,22 +21,29 @@ export class main {
     }
     getHorizontalArray(){
         let array:Array<Cell> = [];
-        for(let c = 0; c < this.numberOfColumns; c++){
+        for(let c = 0; c < this.getNumberOfColumns(); c++){
             array.push({column: c, row:0});
         }
         return array;
     }
     getVerticalArray(){
         let array:Array<Cell> = [];
-        for(let c = 0; c < this.numberOfRows; c++){
+        for(let c = 0; c < this.getNumberOfRows(); c++){
             array.push({column: 0, row:c});
         }
         return array;
     }
     getColWidths(){
         let array: Array<number> = [];
-        this.horizontalArray.forEach((cell:Cell)=>{
+        this.getHorizontalArray().forEach((cell:Cell)=>{
             array.push(this.hot.getColWidth(cell.column));
+        });
+        return array;
+    }
+    getRowHeights(){
+        let array: Array<number> = [];
+        this.getVerticalArray().forEach((cell:Cell)=>{
+            array.push(this.hot.getRowHeight(cell.row)||23);
         });
         return array;
     }
